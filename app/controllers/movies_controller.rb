@@ -3,12 +3,22 @@ class MoviesController < ApplicationController
 
   # GET /movies or /movies.json
   def index
-    @movies = Movie.all
-  end
+    #@response = HTTParty.get("http://www.omdbapi.com/?apikey=909075bf&s=fight")
+    #@result = @response.body
+    #respond_to do |format|
+    #format.json { render :json => JSON.parse(@result) }
+    #format.html { render "index.html.erb" }
+    #end
+    @trailers = Trailer.all
+    @movies = Movie.all.order(average_vote: :desc)
+    
+end
 
   # GET /movies/1 or /movies/1.json
   def show
+
   end
+
 
   # GET /movies/new
   def new
@@ -64,6 +74,6 @@ class MoviesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def movie_params
-      params.fetch(:movie, {})
+      params.require(:movie).permit(:movie_id, :title, :release_date, :backdrop_path, :poster_path, :overview, :average_vote, :buget, :tegline, :tegline)
     end
 end
