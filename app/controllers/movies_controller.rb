@@ -16,7 +16,7 @@ end
 
   # GET /movies/1 or /movies/1.json
   def show
-
+    MovieListMailer.sample_email().deliver
   end
 
 
@@ -32,6 +32,8 @@ end
   # POST /movies or /movies.json
   def create
     @movie = Movie.new(movie_params)
+
+
 
     respond_to do |format|
       if @movie.save
