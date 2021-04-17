@@ -16,7 +16,7 @@ end
 
   # GET /movies/1 or /movies/1.json
   def show
-    MovieListMailer.sample_email().deliver
+    #MovieListMailer.sample_email().deliver
   end
 
 
