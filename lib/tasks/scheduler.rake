@@ -13,3 +13,13 @@ task :update => :environment do
   puts "done"
 end
 end
+
+task :update_trailer => :environment do
+    trailer_seed = JSON.parse(RestClient.get("https://youtube.googleapis.com/youtube/v3/search?channelId=UCT0hbLDa-unWsnZ6Rjzkfug&key=#{ENV["YOUTUBE_API_KEY"]}"))
+    trailer_seed['items'].each do |trailer|
+      Trailer.where(
+        videoId: trailer['id']['videoId']
+      ).first_or_create
+    end
+    puts "done"
+end
